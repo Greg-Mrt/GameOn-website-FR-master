@@ -25,3 +25,4 @@ function launchModal() {
 }
 
 //close the modal form
+function closeModal ()
