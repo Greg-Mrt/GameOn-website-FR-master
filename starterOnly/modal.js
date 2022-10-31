@@ -7,7 +7,7 @@ function editNav() {
   }
 }
 
-// DOM Elements
+// DOM Elements modal
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
@@ -16,7 +16,7 @@ const closeModalX = document.querySelector('.close');
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-//close modal form
+//close modal event
 closeModalX.addEventListener("click", closeModal);
 
 // launch modal form
@@ -31,31 +31,44 @@ function closeModal (){
 
 
 //check "prénom" data
-function checkFirstName() {
-  let regex = /^[a-z]+$/;
+function checkFirstNameInput() {
+  let regex = /^([a-zA-Z\-]+)$/;
 	let inputValue = document.getElementById("first").value;
-	if (inputValue !== null && inputValue.length > 2) return true;
-	else return regex.test(inputValue);
+	if (inputValue !== null && inputValue.length > 2) {
+    return regex.test(inputValue);
+  }   
+	else {
+    return alert("Saisissez un nom valide");
+  }
 }
 
-function checkLastName() {
-	let inputValue = document.getElementById("last").value;
-	if (inputValue !== null && inputValue.length > 2) return true;
-	else return false;
+//check "nom de famille" data
+function checkFirstNameInput() {
+  let regex = /^([a-zA-Z\-]+)$/;
+	let inputValue = document.getElementById("first").value;
+	if (inputValue !== null && inputValue.length > 2) {
+    return regex.test(inputValue);
+  }   
+	else {
+    return alert("Saisissez un nom valide");
+  }
 }
 
+//check "email" data
 function checkEmail() {
     let regex = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,4})$/;
     let inputValue = document.getElementById("email").value;
     return regex.test(inputValue);
 }
 
+//check "tournois quantité" data
 function checkQuantity() {
     let regex = /^[0-9]+$/;
     let inputValue = document.getElementById("quantity").value;
     return regex.test(inputValue);
 }
 
+//check "ville" radio
 function checklocation() {
     let radioButtons = document.querySelectorAll(".checkbox-input[type=radio]");
     for(let radio of radioButtons){
@@ -64,14 +77,8 @@ function checklocation() {
     return false;
 }
 
+//check "première checkbox"
 function verifcheckbox() {
     let inputValue = document.getElementById("checkbox1").checked;
     return inputValue;
 }
-
-document
-	.getElementById("button")
-	.addEventListener("click", function checkForm(event) {
-		event.preventDefault();
-		console.log(verifcheckbox());
-	});
