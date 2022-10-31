@@ -30,7 +30,7 @@ function closeModal (){
 }
 
 
-//check first name data
+//check "prénom" data
 function checkFirstName() {
   let regex = /^[a-z]+$/;
 	let inputValue = document.getElementById("first").value;
