@@ -38,19 +38,21 @@ function checkFirstNameInput() {
     return regex.test(inputValue);
   }   
 	else {
-    return alert("Saisissez un nom valide");
+    alert("Saisissez un prénom valide");
+    return false;
   }
 }
 
 //check "nom de famille" data
-function checkFirstNameInput() {
+function checkLastNameInput() {
   let regex = /^([a-zA-Z\-]+)$/;
-	let inputValue = document.getElementById("first").value;
+	let inputValue = document.getElementById("last").value;
 	if (inputValue !== null && inputValue.length > 2) {
     return regex.test(inputValue);
   }   
 	else {
-    return alert("Saisissez un nom valide");
+    alert("Saisissez un nom valide");
+    return false;
   }
 }
 
@@ -81,4 +83,15 @@ function checklocation() {
 function verifcheckbox() {
     let inputValue = document.getElementById("checkbox1").checked;
     return inputValue;
+}
+
+
+
+document.querySelector("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+})
+
+
+function validate () {
+
 }
