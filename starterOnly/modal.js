@@ -29,9 +29,8 @@ function closeModal (){
   modalbg.style.display = "none";
 }
 
-
 //check "prénom" data
-function checkFirstNameInput() {
+function FirstName () {
   let regex = /^([a-zA-Z\-]+)$/;
 	let inputValue = document.getElementById("first").value;
 	if (inputValue !== null && inputValue.length > 2) {
@@ -44,7 +43,7 @@ function checkFirstNameInput() {
 }
 
 //check "nom de famille" data
-function checkLastNameInput() {
+function LastName () {
   let regex = /^([a-zA-Z\-]+)$/;
 	let inputValue = document.getElementById("last").value;
 	if (inputValue !== null && inputValue.length > 2) {
@@ -57,41 +56,57 @@ function checkLastNameInput() {
 }
 
 //check "email" data
-function checkEmail() {
+function Email () {
     let regex = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,4})$/;
     let inputValue = document.getElementById("email").value;
-    return regex.test(inputValue);
+    if (inputValue !== null){
+      return regex.test(inputValue);
+    }
+    else {
+      return false;
+    }
 }
 
 //check "tournois quantité" data
-function checkQuantity() {
+function Quantity() {
     let regex = /^[0-9]+$/;
     let inputValue = document.getElementById("quantity").value;
-    return regex.test(inputValue);
+    if (inputValue !== null){
+      return regex.test(inputValue);
+    }
+    else {
+      return false;
+    }
 }
 
 //check "ville" radio
-function checklocation() {
+function City() {
     let radioButtons = document.querySelectorAll(".checkbox-input[type=radio]");
     for(let radio of radioButtons){
-        if(radio.checked === true) return true;
+        if(radio.checked === true) 
+          return true;
     }
     return false;
 }
 
 //check "première checkbox"
-function verifcheckbox() {
+function Checkbox() {
     let inputValue = document.getElementById("checkbox1").checked;
     return inputValue;
 }
 
 
-
+//corriger la fonction par défaut
 document.querySelector("form").addEventListener("submit", (e) => {
-  e.preventDefault();
+  e.preventDefault();  
 })
 
 
 function validate () {
-
-}
+    if (FirstName === true) {
+      return true;
+    } 
+    else {
+      FirstName.formData = "invalid";
+    }
+  }
