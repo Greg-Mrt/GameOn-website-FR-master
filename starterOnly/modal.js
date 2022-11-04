@@ -31,7 +31,7 @@ function closeModal (){
 
 //check "prénom" data
 function FirstName () {
-  let regex = /^([a-zA-Z\-]+)$/;
+  let regex = /^([a-zA-Z '\-éèêëçäàïÿ]+)$/;
 	let inputValue = document.getElementById("first").value;
 	if (inputValue !== null && inputValue.length > 2) {
     return regex.test(inputValue);
@@ -44,7 +44,7 @@ function FirstName () {
 
 //check "nom de famille" data
 function LastName () {
-  let regex = /^([a-zA-Z\-]+)$/;
+  let regex = /^([a-zA-Z '\-éèêëçäàïÿ]+)$/;
 	let inputValue = document.getElementById("last").value;
 	if (inputValue !== null && inputValue.length > 2) {
     return regex.test(inputValue);
@@ -96,17 +96,67 @@ function Checkbox() {
 }
 
 
-//corriger la fonction par défaut
+
+  // fonction pour valider le formulaire
+
 document.querySelector("form").addEventListener("submit", (e) => {
-  e.preventDefault();  
-})
+  // "annuler" le comportement par défaut
+  e.preventDefault();
+
+ 
+  // vider les erreurs
+  // ...
+
+  // vérifier un par un tous les champs
+  const verifFirstName = FirstName();
+  const verifLastName = LastName();
+  const verifEmail = Email();
+  const verifQuantity = Quantity();
+  const verifCity = City();
+  const verifCheckbox = Checkbox();
 
 
-function validate () {
-    if (FirstName === true) {
-      return true;
-    } 
-    else {
-      FirstName.formData = "invalid";
-    }
+  console.log(verifFirstName, verifLastName, verifEmail, verifQuantity, verifCity, verifCheckbox)
+
+  // si j'ai tout à vrai : TOUT VA BIEN
+  if(verifFirstName && verifLastName && verifEmail && verifQuantity && verifCity && verifCheckbox)
+  {
+    // j'affiche le message de succès
+    console.log("OK C BON")
   }
+  // sinon, j'ai au moins un faux
+  else
+  {
+    console.log("ERREUR")
+    if(!verifFirstName)
+    {
+      console.log("prénom faux")
+      document.querySelector("#first").parentElement.setAttribute("data-error", "Saisissez un prénom valide")
+      document.querySelector("#first").parentElement.setAttribute("data-error-visible", true)
+    }
+
+    if(!verifLastName)
+    {
+      console.log("nom faux")
+      document.querySelector("#last").parentElement.setAttribute("data-error", "Saisissez un nom valide")
+      document.querySelector("#last").parentElement.setAttribute("data-error-visible", true)
+    }
+
+    if(!verifEmail)
+    {
+      console.log("email faux")
+      document.querySelector("#email").parentElement.setAttribute("data-error", "Saisissez un email valide")
+      document.querySelector("#email").parentElement.setAttribute("data-error-visible", true)
+    }
+
+    if(!verifQuantity)
+    {
+      console.log("tournois faux")
+      document.querySelector("#quantity").parentElement.setAttribute("data-error", "Saisissez un nombre valide")
+      document.querySelector("#quantity").parentElement.setAttribute("data-error-visible", true)
+    }
+
+
+  }
+
+})
