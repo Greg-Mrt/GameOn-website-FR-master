@@ -103,9 +103,6 @@ document.querySelector("form").addEventListener("submit", (e) => {
   // "annuler" le comportement par défaut
   e.preventDefault();
 
- 
-  // vider les erreurs
-  // ...
 
   // vérifier un par un tous les champs
   const verifFirstName = FirstName();
@@ -156,7 +153,28 @@ document.querySelector("form").addEventListener("submit", (e) => {
       document.querySelector("#quantity").parentElement.setAttribute("data-error-visible", true)
     }
 
+    if(!verifCity)
+    {
+      console.log("city faux")
+      document.querySelector(".checkbox-input").parentElement.setAttribute("data-error", "Saisissez une ville")
+      document.querySelector(".checkbox-input").parentElement.setAttribute("data-error-visible", true)
+    }
 
+    if(!verifCheckbox)
+    {
+      console.log("agreement faux")
+      document.querySelector("#checkbox1").parentElement.setAttribute("data-error", "Ce champ est obligatoire")
+      document.querySelector("#checkbox1").parentElement.setAttribute("data-error-visible", true)
+    }
   }
 
 })
+
+  // vider les erreurs
+  const reset = document.querySelector('.btn-submit');
+
+  reset.addEventListener("click", viderErreur);
+
+  function viderErreur() {
+    document.getElementById("form").reset();
+  }
