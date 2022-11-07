@@ -103,6 +103,8 @@ document.querySelector("form").addEventListener("submit", (e) => {
   // "annuler" le comportement par défaut
   e.preventDefault();
 
+viderErreur();
+  
 
   // vérifier un par un tous les champs
   const verifFirstName = FirstName();
@@ -120,6 +122,11 @@ document.querySelector("form").addEventListener("submit", (e) => {
   {
     // j'affiche le message de succès
     console.log("OK C BON")
+    document.querySelector("form").style.display="none";
+    let message=document.createElement("p");
+    message.innerHTML="Merci pour votre inscription";
+    message.style.textAlign="center";
+    document.querySelector(".modal-body").appendChild(message);
   }
   // sinon, j'ai au moins un faux
   else
@@ -171,10 +178,23 @@ document.querySelector("form").addEventListener("submit", (e) => {
 })
 
   // vider les erreurs
-  const reset = document.querySelector('.btn-submit');
-
-  reset.addEventListener("click", viderErreur);
 
   function viderErreur() {
-    document.getElementById("form").reset();
+    document.querySelector("#first").parentElement.setAttribute("data-error", "")
+    document.querySelector("#first").parentElement.setAttribute("data-error-visible", false)
+
+    document.querySelector("#last").parentElement.setAttribute("data-error", "")
+    document.querySelector("#last").parentElement.setAttribute("data-error-visible", false)
+
+    document.querySelector("#email").parentElement.setAttribute("data-error", "")
+    document.querySelector("#email").parentElement.setAttribute("data-error-visible", false)
+
+    document.querySelector("#quantity").parentElement.setAttribute("data-error", "")
+    document.querySelector("#quantity").parentElement.setAttribute("data-error-visible", false)
+
+    document.querySelector(".checkbox-input").parentElement.setAttribute("data-error", "")
+    document.querySelector(".checkbox-input").parentElement.setAttribute("data-error-visible", false)
+
+    document.querySelector("#checkbox1").parentElement.setAttribute("data-error", "")
+    document.querySelector("#checkbox1").parentElement.setAttribute("data-error-visible", false)
   }
