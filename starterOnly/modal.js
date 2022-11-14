@@ -37,7 +37,6 @@ function FirstName () {
     return regex.test(inputValue);
   }   
 	else {
-    alert("Saisissez un prénom valide");
     return false;
   }
 }
@@ -50,7 +49,6 @@ function LastName () {
     return regex.test(inputValue);
   }   
 	else {
-    alert("Saisissez un nom valide");
     return false;
   }
 }
@@ -65,6 +63,17 @@ function Email () {
     else {
       return false;
     }
+}
+
+//check "anniversaire" data
+function Birthdate () {
+  let inputValue = document.getElementById("birthdate").value;
+  if (inputValue !== ""){
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 //check "tournois quantité" data
@@ -95,10 +104,7 @@ function Checkbox() {
     return inputValue;
 }
 
-
-
   // fonction pour valider le formulaire
-
 document.querySelector("form").addEventListener("submit", (e) => {
   // "annuler" le comportement par défaut
   e.preventDefault();
@@ -110,66 +116,69 @@ viderErreur();
   const verifFirstName = FirstName();
   const verifLastName = LastName();
   const verifEmail = Email();
+  const verifBirthdate = Birthdate();
   const verifQuantity = Quantity();
   const verifCity = City();
   const verifCheckbox = Checkbox();
 
 
-  console.log(verifFirstName, verifLastName, verifEmail, verifQuantity, verifCity, verifCheckbox)
-
-  // si j'ai tout à vrai : TOUT VA BIEN
-  if(verifFirstName && verifLastName && verifEmail && verifQuantity && verifCity && verifCheckbox)
+  // si tout est vrai 
+  if(verifFirstName && verifLastName && verifEmail && verifBirthdate && verifQuantity && verifCity && verifCheckbox)
   {
     // j'affiche le message de succès
-    console.log("OK C BON")
     document.querySelector("form").style.display="none";
     let message=document.createElement("p");
-    message.innerHTML="Merci pour votre inscription";
+    message.innerHTML="Merci ! Votre inscription est validée.";
+    message.style.color="red";
     message.style.textAlign="center";
+    message.style.marginTop="100px";
+    message.style.marginBottom="100px";
+    message.style.marginRight="40px";
+    message.style.marginLeft="40px";
+    message.style.fontSize="25px";
     document.querySelector(".modal-body").appendChild(message);
   }
-  // sinon, j'ai au moins un faux
+  // si j'ai au moins un faux
   else
   {
-    console.log("ERREUR")
     if(!verifFirstName)
     {
-      console.log("prénom faux")
       document.querySelector("#first").parentElement.setAttribute("data-error", "Saisissez un prénom valide")
       document.querySelector("#first").parentElement.setAttribute("data-error-visible", true)
     }
 
     if(!verifLastName)
     {
-      console.log("nom faux")
       document.querySelector("#last").parentElement.setAttribute("data-error", "Saisissez un nom valide")
       document.querySelector("#last").parentElement.setAttribute("data-error-visible", true)
     }
 
     if(!verifEmail)
     {
-      console.log("email faux")
       document.querySelector("#email").parentElement.setAttribute("data-error", "Saisissez un email valide")
       document.querySelector("#email").parentElement.setAttribute("data-error-visible", true)
     }
 
+    if(!verifBirthdate)
+    {
+      document.querySelector("#birthdate").parentElement.setAttribute("data-error", "Saisissez une date de naissance")
+      document.querySelector("#birthdate").parentElement.setAttribute("data-error-visible", true)
+    }
+
     if(!verifQuantity)
     {
-      console.log("tournois faux")
       document.querySelector("#quantity").parentElement.setAttribute("data-error", "Saisissez un nombre valide")
       document.querySelector("#quantity").parentElement.setAttribute("data-error-visible", true)
     }
 
     if(!verifCity)
     {
-      console.log("city faux")
       document.querySelector(".checkbox-input").parentElement.setAttribute("data-error", "Saisissez une ville")
       document.querySelector(".checkbox-input").parentElement.setAttribute("data-error-visible", true)
     }
 
     if(!verifCheckbox)
     {
-      console.log("agreement faux")
       document.querySelector("#checkbox1").parentElement.setAttribute("data-error", "Ce champ est obligatoire")
       document.querySelector("#checkbox1").parentElement.setAttribute("data-error-visible", true)
     }
@@ -177,8 +186,7 @@ viderErreur();
 
 })
 
-  // vider les erreurs
-
+// vider les erreurs
   function viderErreur() {
     document.querySelector("#first").parentElement.setAttribute("data-error", "")
     document.querySelector("#first").parentElement.setAttribute("data-error-visible", false)
@@ -188,6 +196,9 @@ viderErreur();
 
     document.querySelector("#email").parentElement.setAttribute("data-error", "")
     document.querySelector("#email").parentElement.setAttribute("data-error-visible", false)
+
+    document.querySelector("#birthdate").parentElement.setAttribute("data-error", "")
+    document.querySelector("#birthdate").parentElement.setAttribute("data-error-visible", false)
 
     document.querySelector("#quantity").parentElement.setAttribute("data-error", "")
     document.querySelector("#quantity").parentElement.setAttribute("data-error-visible", false)
